@@ -1,0 +1,139 @@
+@startuml UmlDiagram
+
+package driver {
+    class Driver {
+        - {static} input: Scanner
+        - {static} option: int
+        - {static} rentalVehicles: Vehicles[]
+        - {static} clientList: Client[]
+        --
+        + {static} main(args: String[]): void
+        --
+        + {static} mainMenu(): void
+        + {static} vehicleManagementMenu(): void
+        + {static} clientManagementMenu(): void
+        + {static} leasingOperationsMenu(): void
+        + {static} additionalOperationsMenu(): void
+        ...
+    }
+}
+
+package vehicle {
+    class Vehicles {
+        # make: String
+        # model: String
+        # yearOfProduction: int
+        # nbOfVehicle: int
+        # isLeased: boolean
+        --
+        + public Vehicles(make: String, model: String, year: int)
+        + getMake(): String
+        + setMake(make: String): void
+        + getModel(): String
+        + setModel(model: String): void
+        ...
+    }
+
+    class DieselTrucks extends Vehicles {
+        - plateNumber: String
+        - nbOfDieselTrucks: int
+        - maximumCapacity: int
+        - tankCapacity: int
+        --
+        + public DieselTrucks(
+            make: String, model: String, 
+            yearOfProduction: int, 
+            maximumCapacity: int, 
+            tankCapacity: int)
+        + getPlateNumber(): String
+        + getNbOfDieselTrucks(): int
+        + getMaximumCapacity(): int
+        + getTankCapacity(): int
+        + setMaximumCapacity(
+            maximumCapacity: int): void
+        + setTankCapacity(
+            tankCapacity: int): void
+    }
+
+    class ElectricTrucks extends Vehicles {
+        - plateNumber: String
+        - nbOfElectricTrucks: int
+        - maximumCapacity: int
+        - autonomyRange: int
+        --
+        + public ElectricTrucks(
+            make: String, model: String, 
+            yearOfProduction: int, 
+            maximumCapacity: int, 
+            autonomyRange: int)
+        + getPlateNumber(): String
+        + getNbOfElectricTrucks(): int
+        + getMaximumCapacity(): int
+        + getAutonomyRange(): int
+        + setMaximumCapacity(
+            maximumCapacity: int): void
+        + setAutonomyRange(
+            autonomyRange: int): void
+        + clone(): ElectricTrucks
+    }
+
+    class GasolineCars extends Vehicles {
+        - plateNumber: String
+        - nbOfGasolineCars: int
+        - maximumPassengers: int
+        --
+        + public GasolineCars(
+            make: String, model: String, 
+            yearOfProduction: int, 
+            maximumPassengers: int)
+        + yearOfProduction(): int
+        + getNbOfGasolineCars(): int
+        + getMaximumPassengers(): int
+        + setMaximumPassengers(
+            maximumPassengers: int): void
+    }
+
+    class ElectricCars extends Vehicles {
+        - plateNumber: String
+        - nbOfElectricCars: int
+        - maximumPassengers: int
+        - autonomyRange: int
+        --
+        + public ElectricCars(
+            make: String, model: String, 
+            yearOfProduction: int, 
+            maximumPassengers: int, 
+            autonomyRange: int)
+        + getPlateNumber(): String
+        + getNbOfElectricCars(): int
+        + getMaximumPassengers(): int
+        + getAutonomyRange(): int
+        + setMaximumPassengers(
+            maximumPassengers: int): void
+        + setAutonomyRange(
+            autonomyRange: int): void
+    }
+}
+
+package client {
+    class Client {
+        - name: String
+        - age: int
+        - leasedVehicles: Vehicles[]
+        --
+        + public Client(name: String, age: int)
+        + getName(): String
+        + getAge(): int
+        + getLeasedVehicle(): Vehicles[]
+        + setName(name: String): void
+        + setAge(age: int): void
+        + setLeasedVehicle(leasedVehicle: Vehicles[]): void
+        ...
+    }
+}
+
+Driver --> Vehicles
+Driver --> Client
+Client --> Vehicles
+
+@enduml
